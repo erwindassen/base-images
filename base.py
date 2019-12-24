@@ -19,6 +19,9 @@ class BaseImageBuilder(object):
     def __init__(self, args):
         self.args = args
         self.client = docker.from_env()
+        print(self.client.api.login(os.getenv('DOCKER_USER',''),
+                                    password=os.getenv('DOCKER_PASSWORD', ''),
+                                    registry=os.getenv('DOCKER_REGISTRY', '')))
 
     @staticmethod
     def _get_root_dir() -> str:
