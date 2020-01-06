@@ -11,9 +11,8 @@ os_release: "16.04"
 license: MIT
 url: null
 image:
-  # server: hub.docker.com
-  server: docker.c42.io
-  namespace: docker.c42.io/polynote
+  server: hub.docker.com
+  namespace: erwindassen
   repository: polynote-minimal
   tag: 84ca3992f7-2019-12-24
 languages:
@@ -21,7 +20,7 @@ languages:
   - scala
 development_tools:
   - jupyterlab
-  - polynote
+  - polynote  # Not sure if this is needed
 package_managers:
   - apt:
   - pip:

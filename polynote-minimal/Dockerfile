@@ -6,12 +6,15 @@
 # Distributed under the terms of the Modified BSD License.
 
 # Start Image Def
+
+# Using a the polynote official image as base
 FROM polynote/polynote:latest
 LABEL maintainer="Gigantum <support@gigantum.com>"
 ENV DEBIAN_FRONTEND noninteractive
 
 USER root
 
+# I also want jupyter and conda base installs
 # Install system level dependencies
 RUN apt-get update \
     && apt-get install -yq --no-install-recommends \
@@ -79,10 +82,15 @@ RUN cd /tmp && \
 
 # Expose port for jupyterlab
 EXPOSE 8888
+
+# Expose port for polynote
 EXPOSE 8192
 
 # Set working dir
 WORKDIR $GIGANTUM_WORKDIR
 
-# CMD may be updated during final image assembly, but this keeps a container alive.
-CMD ["tail", "-f", "/dev/null"]
+# This is the entrypoint for polynote so should be mapped correctly during the final image assembly
+USER polly
+WORKDIR /opt
+ENTRYPOINT ["./polynote/polynote.py"]
+#CMD ["./polynote/polynote.py"]
